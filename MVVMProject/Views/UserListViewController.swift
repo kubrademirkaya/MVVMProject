@@ -21,7 +21,6 @@ class UserListViewController: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tableView.rowHeight = UITableView.automaticDimension
-        //tableView.estimatedRowHeight = 30
         tableView.register(UserListTableViewCell.self, forCellReuseIdentifier: "UserListTableViewCell")
         return tableView
     }()
@@ -33,8 +32,6 @@ class UserListViewController: UIViewController {
         activityIndicator.startAnimating()
         return activityIndicator
     }()
-    
-    
     
     //ViewModel Init Func
     func initViewModel() {
@@ -55,25 +52,24 @@ class UserListViewController: UIViewController {
                 }
             }
         }
-        
-        viewModel.reloadTableViewClosure = {
+        viewModel.fetchData { users in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
-        
-        viewModel.fetchData()
-        
     }
     
-    
+    func showAlert( _ message: String ) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initViewModel()
-        
         setupViews()
+        initViewModel()
         
     }
     
@@ -100,18 +96,18 @@ extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserListTableViewCell", for: indexPath) as? UserListTableViewCell else {
-            fatalError("Error")
+            fatalError("Fatal Error")
         }
         
-        let cellViewModel = viewModel.getCellViewModel( at: indexPath )
-        cell.userListCellViewModel = cellViewModel
-        
+        let user = viewModel.user(at: indexPath.row)
+        cell.configure(model: user)
+
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfCells
+        return viewModel.userCount
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

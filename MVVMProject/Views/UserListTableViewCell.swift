@@ -63,7 +63,6 @@ class UserListTableViewCell: UITableViewCell {
         
        setupLayout()
     }
-    
 
     public func setupLayout() {
         
@@ -99,17 +98,13 @@ class UserListTableViewCell: UITableViewCell {
         }
     }
     
-    var userListCellViewModel : UserListCellViewModel? {
-        didSet {
-            
-            guard let userListCellViewModel = userListCellViewModel else { return }
-            
-            labelId.text = String(userListCellViewModel.labelId)
-            labelName.text = userListCellViewModel.labelName
-            labelSurname.text = userListCellViewModel.labelSurname
-            labelBirthday.text = userListCellViewModel.labelBirthday
-            labelEmail.text = userListCellViewModel.labelEmail
-        }
+    public func configure(model: User) {
+        
+        labelId.text = String(model.id)
+        labelName.text = model.name
+        labelSurname.text = model.surname
+        labelBirthday.text = model.birthday
+        labelEmail.text = model.email
+        
     }
-
 }

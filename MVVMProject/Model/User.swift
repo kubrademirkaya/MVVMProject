@@ -19,11 +19,3 @@ struct User: Codable {
     var email: String
 }
 
-struct UserListCellViewModel {
-    
-    let labelId: Int
-    let labelName: String
-    let labelSurname: String
-    let labelBirthday: String
-    let labelEmail: String
-}

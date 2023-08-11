@@ -15,12 +15,6 @@ class UserListViewModel {
     
     private var users: [User] = [User]()
     
-    private var cellViewModels: [UserListCellViewModel] = [UserListCellViewModel]() {
-        didSet {
-            self.reloadTableViewClosure?()
-        }
-    }
-    
     //activity Indicator
     var isLoading: Bool = false {
         didSet {
@@ -28,56 +22,45 @@ class UserListViewModel {
         }
     }
     
-    var numberOfCells: Int {
-        return cellViewModels.count
-    }
-    
-
     var reloadTableViewClosure: (()->())?
 
     var updateLoadingStatus: (()->())?
+    
+    var alertMessage: String? {
+        didSet {
+            self.showAlertClosure?()
+        }
+    }
+    
+    var showAlertClosure: (()->())?
 
    
     init( apiService: APIServiceProtocol = APIService()) {
             self.apiService = apiService
     }
     
-    func fetchData() {
+    func fetchData(with callback: @escaping (([User]) -> Void)) {
         self.isLoading = true
+        
         apiService.fetchUserInfo { [weak self] (success, users, error) in
-            self?.isLoading = false
+            guard let this = self else { return }
             if let error = error {
-                print("error")
+                self?.alertMessage = error.rawValue
             } else {
-                self?.processFetched(users: users)
+                this.users = users
+                self?.isLoading = false
+               callback(users)
             }
         }
     }
     
-    func getCellViewModel( at indexPath: IndexPath ) -> UserListCellViewModel {
-        return cellViewModels[indexPath.row]
+    func user(at index: Int) -> User {
+        return users[index]
     }
     
-    func createCellViewModel( user: User ) -> UserListCellViewModel {
-        
-        return UserListCellViewModel ( labelId: user.id,
-                                       labelName: user.name,
-                                       labelSurname: user.surname,
-                                       labelBirthday: user.birthday,
-                                       labelEmail: user.email)
-
+    var userCount: Int {
+        return users.count
     }
-    
-    
-    private func processFetched( users: [User] ) {
-        self.users = users // Cache
-        var vms = [UserListCellViewModel]()
-        for user in users {
-            vms.append( createCellViewModel(user: user) )
-        }
-        self.cellViewModels = vms
-    }
-    
 }
 
 

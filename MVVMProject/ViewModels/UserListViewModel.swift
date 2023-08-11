@@ -89,11 +89,4 @@ class UserListViewModel {
 }
 
 
-struct UserListCellViewModel {
-    
-    let labelId: Int
-    let labelName: String
-    let labelSurname: String
-    let labelBirthday: String
-    let labelEmail: String
-}
+

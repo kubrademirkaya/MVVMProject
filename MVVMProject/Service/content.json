@@ -1,0 +1,46 @@
+
+
+{
+    "users": [
+        {
+        "id": 230200335,
+        "name": "Alice",
+        "surname": "Johnson",
+        "birthday": "01.01.1996",
+        "email": "alice@example.com"
+        },
+        {
+        "id": 230223335,
+        "name": "Brendan",
+        "surname": "Miller",
+        "birthday": "02.01.1996",
+        "email": "brendan@example.com"
+        },
+        {
+        "id": 564200335,
+        "name": "Catherine",
+        "surname": "Johnson",
+        "birthday": "03.01.1996",
+        "email": "catherine@example.com"
+        },
+        {
+        "id": 230200467,
+        "name": "Frank",
+        "surname": "Wilson",
+        "birthday": "04.01.1996",
+        "email": "frank@example.com"
+        },
+        {
+        "id": 577800335,
+        "name": "Jack",
+        "surname": "Clark",
+        "birthday": "05.01.1996",
+        "email": "jack@example.com"
+        },
+        
+        
+    ]
+    
+    
+}
+

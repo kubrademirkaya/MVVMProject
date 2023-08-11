@@ -20,17 +20,11 @@ class UserListViewModel {
             self.reloadTableViewClosure?()
         }
     }
-
     
+    //activity Indicator
     var isLoading: Bool = false {
         didSet {
             self.updateLoadingStatus?()
-        }
-    }
-    
-    var alertMessage: String? {
-        didSet {
-            self.showAlertClosure?()
         }
     }
     
@@ -38,12 +32,9 @@ class UserListViewModel {
         return cellViewModels.count
     }
     
-    var isAllowSegue: Bool = false
-    
-    var selectedUser: User?
-    
+
     var reloadTableViewClosure: (()->())?
-    var showAlertClosure: (()->())?
+
     var updateLoadingStatus: (()->())?
 
    
@@ -51,14 +42,14 @@ class UserListViewModel {
             self.apiService = apiService
     }
     
-    func initFetch() {
+    func fetchData() {
         self.isLoading = true
         apiService.fetchUserInfo { [weak self] (success, users, error) in
             self?.isLoading = false
             if let error = error {
-                self?.alertMessage = error.rawValue
+                print("error")
             } else {
-                self?.processFetchedPhoto(users: users)
+                self?.processFetched(users: users)
             }
         }
     }
@@ -77,7 +68,8 @@ class UserListViewModel {
 
     }
     
-    private func processFetchedPhoto( users: [User] ) {
+    
+    private func processFetched( users: [User] ) {
         self.users = users // Cache
         var vms = [UserListCellViewModel]()
         for user in users {

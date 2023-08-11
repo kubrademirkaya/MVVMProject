@@ -37,15 +37,7 @@ class UserListViewController: UIViewController {
     
     
     //ViewModel Init Func
-    func initVM() {
-        
-        viewModel.showAlertClosure = {
-            DispatchQueue.main.async {
-                if let message = self.viewModel.alertMessage {
-                    self.showAlert( message )
-                }
-            }
-        }
+    func initViewModel() {
         
         viewModel.updateLoadingStatus = {
             DispatchQueue.main.async {
@@ -70,15 +62,8 @@ class UserListViewController: UIViewController {
             }
         }
         
-        viewModel.initFetch()
+        viewModel.fetchData()
         
-    }
-    
-    //Alert func
-    func showAlert( _ message: String ) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -86,7 +71,7 @@ class UserListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initVM()
+        initViewModel()
         
         setupViews()
         
@@ -118,8 +103,8 @@ extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Error")
         }
         
-        let cellVM = viewModel.getCellViewModel( at: indexPath )
-        cell.userListCellViewModel = cellVM
+        let cellViewModel = viewModel.getCellViewModel( at: indexPath )
+        cell.userListCellViewModel = cellViewModel
         
         return cell
     }
@@ -135,109 +120,4 @@ extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-
-
-//class UserTableViewCell: UITableViewCell {
-//
-//    private lazy var labelId:UILabel = {
-//        let label = UILabel()
-//        return label
-//    }()
-//
-//    private lazy var labelName:UILabel = {
-//        let label = UILabel()
-//        return label
-//    }()
-//
-//    private lazy var labelSurname:UILabel = {
-//        let label = UILabel()
-//        return label
-//    }()
-//
-//    private lazy var labelBirthday:UILabel = {
-//        let label = UILabel()
-//        return label
-//    }()
-//
-//    private lazy var labelEmail:UILabel = {
-//        let label = UILabel()
-//        return label
-//    }()
-//
-//
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//    }
-//
-//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//
-//        setupViews()
-//    }
-//
-//    required  init?(coder: NSCoder) {
-//        fatalError(" ")
-//    }
-//
-//    public func setupViews() {
-//
-//        self.contentView.backgroundColor = .white
-//
-//        self.addSubviews(labelId,
-//                         labelName,
-//                         labelSurname,
-//                         labelBirthday,
-//                         labelEmail)
-//
-//       setupLayout()
-//    }
-//
-//    public func setupLayout() {
-//
-//        labelId.snp.makeConstraints { label in
-//            label.top.equalTo(self.contentView.safeAreaLayoutGuide.snp.top)
-//            label.leading.equalToSuperview().offset(16)
-//            label.trailing.equalToSuperview().offset(-16)
-//        }
-//
-//        labelName.snp.makeConstraints { label in
-//            label.top.equalTo(labelId.snp.bottom).offset(8)
-//            label.leading.equalTo(labelId.snp.leading)
-//            label.trailing.equalTo(labelId.snp.trailing)
-//        }
-//
-//        labelSurname.snp.makeConstraints { label in
-//            label.top.equalTo(labelName.snp.bottom).offset(8)
-//            label.leading.equalTo(labelName.snp.leading)
-//            label.trailing.equalTo(labelName.snp.trailing)
-//        }
-//
-//        labelBirthday.snp.makeConstraints { label in
-//            label.top.equalTo(labelSurname.snp.bottom).offset(8)
-//            label.leading.equalTo(labelSurname.snp.leading)
-//            label.trailing.equalTo(labelSurname.snp.trailing)
-//        }
-//
-//        labelEmail.snp.makeConstraints { label in
-//            label.top.equalTo(labelBirthday.snp.bottom).offset(8)
-//            label.leading.equalTo(labelBirthday.snp.leading)
-//            label.trailing.equalTo(labelBirthday.snp.trailing)
-//            label.bottom.equalTo(self.contentView.safeAreaLayoutGuide.snp.bottom).offset(-8)
-//        }
-//    }
-//
-//    var userListCellViewModel : UserListCellViewModel? {
-//        didSet {
-//
-//            guard let userListCellViewModel = userListCellViewModel else { return }
-//
-//            labelId.text = String(userListCellViewModel.labelId)
-//            labelName.text = userListCellViewModel.labelName
-//            labelSurname.text = userListCellViewModel.labelSurname
-//            labelBirthday.text = userListCellViewModel.labelBirthday
-//            labelEmail.text = userListCellViewModel.labelEmail
-//        }
-//    }
-//
-//}
 

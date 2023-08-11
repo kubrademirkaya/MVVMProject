@@ -19,6 +19,7 @@
 		E0AC22A42A851C0300AF9B77 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC22A32A851C0300AF9B77 /* Extension.swift */; };
 		E0AC22A82A860C6B00AF9B77 /* UserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC22A72A860C6B00AF9B77 /* UserListTableViewCell.swift */; };
 		E0AC22AA2A86185A00AF9B77 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC22A92A86185A00AF9B77 /* User.swift */; };
+		E0AC22AC2A861B0E00AF9B77 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC22AB2A861B0E00AF9B77 /* UserDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E0AC22A32A851C0300AF9B77 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		E0AC22A72A860C6B00AF9B77 /* UserListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListTableViewCell.swift; sourceTree = "<group>"; };
 		E0AC22A92A86185A00AF9B77 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E0AC22AB2A861B0E00AF9B77 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			children = (
 				E0AC22A72A860C6B00AF9B77 /* UserListTableViewCell.swift */,
 				E0AC229D2A850E1B00AF9B77 /* UserListViewController.swift */,
+				E0AC22AB2A861B0E00AF9B77 /* UserDetailsViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				E0AC227C2A8505AD00AF9B77 /* AppDelegate.swift in Sources */,
 				E0AC227E2A8505AD00AF9B77 /* SceneDelegate.swift in Sources */,
 				E0AC229E2A850E1B00AF9B77 /* UserListViewController.swift in Sources */,
+				E0AC22AC2A861B0E00AF9B77 /* UserDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
